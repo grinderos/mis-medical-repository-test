@@ -1,5 +1,6 @@
 package academy.kata.mis.personservice.repository;
 
+import academy.kata.mis.personservice.dto.person.DoctorPersonToReportServiceDTO;
 import academy.kata.mis.personservice.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,4 +17,18 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             WHERE p.userId =:userId AND c.contactType = 'EMAIL'
             """)
     String getPersonEmailByUserId(UUID userId);
+
+    Person getById(Long id);
+
+    @Query("""
+            SELECT NEW academy.kata.mis.personservice.dto.person.DoctorPersonToReportServiceDTO(
+            p.id,
+            p.firstName,
+            p.lastName,
+            p.patronymic
+            )
+            FROM Person p
+            WHERE p.id = :doctorPersonId
+            """)
+    DoctorPersonToReportServiceDTO getDoctorPersonToReportServiceDTO(Long doctorPersonId);
 }
