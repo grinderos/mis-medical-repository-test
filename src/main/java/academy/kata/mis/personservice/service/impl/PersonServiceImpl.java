@@ -7,6 +7,7 @@ import academy.kata.mis.personservice.service.PersonService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Service
@@ -35,7 +36,7 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public DoctorPersonToReportServiceDTO getDoctorPersonToReportServiceDTO(Long doctorPersonId) {
-        return personRepository.getDoctorPersonToReportServiceDTO(doctorPersonId);
+    public Set<DoctorPersonToReportServiceDTO> getDoctorPersonsToReportServiceDTO(Set<Long> doctorPersonIds) {
+        return personRepository.getDoctorPersonsToReportServiceDTO(doctorPersonIds);
     }
 }

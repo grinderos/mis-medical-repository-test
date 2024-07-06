@@ -1,7 +1,7 @@
 package academy.kata.mis.personservice.dto.person;
 
+import academy.kata.mis.personservice.dto.contact.ContactToReportServiceDTO;
 import academy.kata.mis.personservice.enums.IdentityDocumentType;
-import academy.kata.mis.personservice.model.Contact;
 import lombok.Builder;
 
 import java.time.LocalDate;
@@ -15,5 +15,5 @@ public record PatientPersonToReportServiceDTO(Long personId,
                                               LocalDate birthday,
                                               IdentityDocumentType documentType,
                                               String documentNumber,
-                                              Set<Contact> contacts) {
+                                              Set<ContactToReportServiceDTO> contacts) {
 }

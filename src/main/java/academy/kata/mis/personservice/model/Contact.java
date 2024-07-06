@@ -59,4 +59,13 @@ public class Contact {
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
     }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+               "id=" + id +
+               ", contactType=" + contactType +
+               ", value='" + value + '\'' +
+               '}';
+    }
 }

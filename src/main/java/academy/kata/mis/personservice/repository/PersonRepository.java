@@ -5,6 +5,7 @@ import academy.kata.mis.personservice.model.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Set;
 import java.util.UUID;
 
 public interface PersonRepository extends JpaRepository<Person, Long> {
@@ -28,7 +29,7 @@ public interface PersonRepository extends JpaRepository<Person, Long> {
             p.patronymic
             )
             FROM Person p
-            WHERE p.id = :doctorPersonId
+            WHERE p.id IN :doctorPersonIds
             """)
-    DoctorPersonToReportServiceDTO getDoctorPersonToReportServiceDTO(Long doctorPersonId);
+    Set<DoctorPersonToReportServiceDTO> getDoctorPersonsToReportServiceDTO(Set<Long> doctorPersonIds);
 }

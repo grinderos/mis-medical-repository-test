@@ -1,6 +1,6 @@
 package academy.kata.mis.personservice.service.impl;
 
-import academy.kata.mis.personservice.model.Contact;
+import academy.kata.mis.personservice.dto.contact.ContactToReportServiceDTO;
 import academy.kata.mis.personservice.repository.ContactRepository;
 import academy.kata.mis.personservice.service.ContactService;
 import lombok.RequiredArgsConstructor;
@@ -14,7 +14,7 @@ public class ContactServiceImpl implements ContactService {
     private final ContactRepository contactRepository;
 
     @Override
-    public Set<Contact> getContactsByPersonId(Long personId) {
+    public Set<ContactToReportServiceDTO> getContactsByPersonId(Long personId) {
         return contactRepository.getContactsByPersonId(personId);
     }
 }

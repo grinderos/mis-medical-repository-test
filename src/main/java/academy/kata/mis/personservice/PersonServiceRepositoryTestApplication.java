@@ -1,12 +1,11 @@
 package academy.kata.mis.personservice;
 
+import academy.kata.mis.personservice.dto.contact.ContactToReportServiceDTO;
 import academy.kata.mis.personservice.dto.person.DoctorPersonToReportServiceDTO;
-import academy.kata.mis.personservice.dto.person.PatientPersonDTO;
 import academy.kata.mis.personservice.dto.person.PatientPersonToReportServiceDTO;
 import academy.kata.mis.personservice.dto.person.PersonToReportServiceDTO;
 import academy.kata.mis.personservice.enums.DocumentStatus;
 import academy.kata.mis.personservice.enums.IdentityDocumentType;
-import academy.kata.mis.personservice.model.Contact;
 import academy.kata.mis.personservice.model.IdentityDocument;
 import academy.kata.mis.personservice.model.Person;
 import academy.kata.mis.personservice.util.PersonServiceManager;
@@ -29,11 +28,14 @@ public class PersonServiceRepositoryTestApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(PersonServiceRepositoryTestApplication.class, args);
+
         Long patientPersonId = 1L;
-        Long doctorPersonId = 2L;
+        Set<Long> doctorPersonIds = Set.of(1L, 3L, 5L);
         Person patient = personServiceManager.getPersonService().getById(patientPersonId);
-        Set<IdentityDocument> documents = personServiceManager.getIdentityService()
-                .getIdentityDocumentsByPersonId(patientPersonId);
+        Set<IdentityDocument> documents = personServiceManager.getIdentityService().getIdentityDocumentsByPersonId(patientPersonId);
+        Set<ContactToReportServiceDTO> contacts = personServiceManager.getContactService().getContactsByPersonId(patientPersonId);
+        Set<DoctorPersonToReportServiceDTO> doctors = personServiceManager.getPersonService().getDoctorPersonsToReportServiceDTO(doctorPersonIds);
+
         IdentityDocument document = null;
         for (IdentityDocument doc : documents) {
             if ((document = doc).getDocumentType().equals(IdentityDocumentType.PASSPORT)
@@ -45,7 +47,6 @@ public class PersonServiceRepositoryTestApplication {
             }
         }
 
-        Set<Contact> contacts = personServiceManager.getContactService().getContactsByPersonId(patientPersonId);
         PersonToReportServiceDTO dto = PersonToReportServiceDTO.builder()
                 .patient(
                         PatientPersonToReportServiceDTO.builder()
@@ -59,9 +60,9 @@ public class PersonServiceRepositoryTestApplication {
                                 .contacts(contacts)
                                 .build()
                 )
-                .doctor(personServiceManager.getPersonService().getDoctorPersonToReportServiceDTO(doctorPersonId))
+                .doctors(doctors)
                 .build();
-
+        System.out.println(dto);
 
 //        System.out.println(document);
 //        System.out.println(patient.getId());
@@ -71,6 +72,5 @@ public class PersonServiceRepositoryTestApplication {
 //        System.out.println(patient.getBirthday());
 //        System.out.println(patient.getIdentityDocuments());
 //        System.out.println(patient.getContacts());
-        System.out.println(dto);
     }
 }

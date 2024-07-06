@@ -1,10 +1,10 @@
 package academy.kata.mis.personservice.service;
 
-import academy.kata.mis.personservice.model.Contact;
+import academy.kata.mis.personservice.dto.contact.ContactToReportServiceDTO;
 
 import java.util.Set;
 
 public interface ContactService {
 
-    Set<Contact> getContactsByPersonId(Long personId);
+    Set<ContactToReportServiceDTO> getContactsByPersonId(Long personId);
 }
