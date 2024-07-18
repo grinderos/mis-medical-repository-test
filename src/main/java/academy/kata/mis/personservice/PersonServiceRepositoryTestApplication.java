@@ -36,15 +36,18 @@ public class PersonServiceRepositoryTestApplication {
         Set<ContactToReportServiceDTO> contacts = personServiceManager.getContactService().getContactsByPersonId(patientPersonId);
         Set<DoctorPersonToReportServiceDTO> doctors = personServiceManager.getPersonService().getDoctorPersonsToReportServiceDTO(doctorPersonIds);
 
+//        IdentityDocument document = personServiceManager.getIdentityService().getIdentityDocumentByPersonId(patientPersonId);
+
         IdentityDocument document = null;
         for (IdentityDocument doc : documents) {
-            if ((document = doc).getDocumentType().equals(IdentityDocumentType.PASSPORT)
-                && document.getStatus().equals(DocumentStatus.ACTUAL)) {
+            if (doc.getDocumentType().equals(IdentityDocumentType.PASSPORT)
+                && doc.getStatus().equals(DocumentStatus.ACTUAL)) {
+                document=doc;
                 break;
-            } else if (document.getDocumentType().equals(IdentityDocumentType.INTERNATIONAL_PASSPORT)
-                       && document.getStatus().equals(DocumentStatus.ACTUAL)) {
-                break;
-            }
+            } else if (doc.getDocumentType().equals(IdentityDocumentType.INTERNATIONAL_PASSPORT)
+                       && doc.getStatus().equals(DocumentStatus.ACTUAL)) {
+                document=doc;
+            } else {document=doc;}
         }
 
         PersonToReportServiceDTO dto = PersonToReportServiceDTO.builder()

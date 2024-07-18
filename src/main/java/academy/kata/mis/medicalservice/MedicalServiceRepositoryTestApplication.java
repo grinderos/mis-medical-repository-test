@@ -1,6 +1,6 @@
 package academy.kata.mis.medicalservice;
 
-import academy.kata.mis.medicalservice.model.entity.Appeal;
+import academy.kata.mis.medicalservice.model.dto.talon.TalonWithDoctorPatientInfoDto;
 import academy.kata.mis.medicalservice.util.MedicalServiceManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +20,10 @@ public class MedicalServiceRepositoryTestApplication {
     public static void main(String[] args) {
         SpringApplication.run(MedicalServiceRepositoryTestApplication.class, args);
 
-        Appeal appeal = medicalServiceManager.getAppealService().getAppealForReportById(1);
-        System.out.println(appeal.getOpenDate());
+//        Appeal appeal = medicalServiceManager.getAppealService().getAppealForReportById(1);
+//        System.out.println(appeal.getOpenDate());
+
+        TalonWithDoctorPatientInfoDto talon = medicalServiceManager.getTalonService().getTalonWithDoctorPatientPersonsById(2L);
+        System.out.println(talon);
     }
 }

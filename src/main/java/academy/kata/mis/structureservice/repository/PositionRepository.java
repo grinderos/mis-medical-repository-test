@@ -1,12 +1,15 @@
 package academy.kata.mis.structureservice.repository;
 
 import academy.kata.mis.structureservice.dto.department_organization_position_cabinet.DepartmentOrganizationPositionCabinetNameDto;
+import academy.kata.mis.structureservice.dto.position.PositionDepOrgToReportDTO;
 import academy.kata.mis.structureservice.dto.positions.RepPositionsDepartmentOrganizationDto;
 import academy.kata.mis.structureservice.model.Position;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.Set;
 
 @Repository
 public interface PositionRepository extends JpaRepository<Position, Long> {
@@ -46,6 +49,17 @@ public interface PositionRepository extends JpaRepository<Position, Long> {
             """)
     RepPositionsDepartmentOrganizationDto getRepPositionsDepartmentOrganizationDto(@Param("positionId") long positionId);
 
-
+    @Query("""
+            SELECT NEW academy.kata.mis.structureservice.dto.position.PositionDepOrgToReportDTO(
+            pos.id,
+            pos.department.id,
+            pos.department.name,
+            pos.department.organization.id,
+            pos.department.organization.name,
+            pos.department.organization.address
+            )
+            FROM Position pos WHERE pos.id IN :positionIds
+            """)
+    Set<PositionDepOrgToReportDTO> getPositionDepOrgToReportDTOs(Set<Long> positionIds);
 }
 

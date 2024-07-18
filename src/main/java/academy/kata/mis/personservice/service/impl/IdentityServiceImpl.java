@@ -17,4 +17,9 @@ public class IdentityServiceImpl implements IdentityService {
     public Set<IdentityDocument> getIdentityDocumentsByPersonId(Long personId) {
         return identityRepository.getIdentityDocumentsByPersonId(personId);
     }
+
+    @Override
+    public IdentityDocument getIdentityDocumentByPersonId(Long personId){
+        return identityRepository.getIdentityDocumentByPersonId(personId);
+    }
 }

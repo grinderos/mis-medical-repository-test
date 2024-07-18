@@ -6,4 +6,6 @@ import java.util.Set;
 
 public interface IdentityService {
     Set<IdentityDocument> getIdentityDocumentsByPersonId(Long personId);
+
+    IdentityDocument getIdentityDocumentByPersonId(Long personId);
 }

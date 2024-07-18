@@ -1,5 +1,6 @@
 package academy.kata.mis.medicalservice.service.impl;
 
+import academy.kata.mis.medicalservice.model.dto.talon.TalonWithDoctorPatientInfoDto;
 import academy.kata.mis.medicalservice.model.entity.Talon;
 import academy.kata.mis.medicalservice.repository.TalonRepository;
 import academy.kata.mis.medicalservice.service.TalonService;
@@ -35,5 +36,9 @@ public class TalonServiceImpl implements TalonService {
     @Override
     public Set<Talon> allPatientTalonByPatientId(long patientId) {
         return talonRepository.findAllByPatientId(patientId);
+    }
+
+    public TalonWithDoctorPatientInfoDto getTalonWithDoctorPatientPersonsById(Long talonId){
+        return talonRepository.getTalonWithDoctorPatientPersonsById(talonId);
     }
 }
