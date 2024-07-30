@@ -23,4 +23,6 @@ public interface DoctorService {
     boolean isDoctorExistsById(Long id);
 
     long getPositionIdByDoctorId(long id);
+
+    boolean areDoctorsInSameDepartment(Long visitId, UUID userId);
 }

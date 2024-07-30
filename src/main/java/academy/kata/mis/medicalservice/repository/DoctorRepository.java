@@ -52,10 +52,18 @@ public interface DoctorRepository extends JpaRepository<Doctor, Long> {
             """)
     long getPositionIdByDoctorId(long id);
 
+    @Query("""
+            SELECT CASE WHEN msd.department.id IN 
+                (SELECT doc.department.id FROM Doctor doc where doc.userId = :doctorUUID) 
+            THEN true ELSE false END
+            FROM Visit vis
+                JOIN vis.medicalServicesDep msd
+            WHERE vis.id = :visitId
+            """)
+    boolean areDoctorsInSameDepartment(@Param("visitId") long visitId, @Param("doctorUUID") UUID doctorUUID);
+
 //    @Query("""
-//            SELECT doc.id FROM Doctor doc
-//            WHERE vis. Visit vis
-//
-//""")
-//    long getDoctorIdByVisitTime();
+//            SELECT doc FROM Doctor doc where doc.userId = :doctorUUID order by doc.id limit 1
+//            """)
+//    long getDoctorIdByUserId(UUID id);
 }

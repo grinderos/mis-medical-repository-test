@@ -72,4 +72,9 @@ public class DoctorServiceImpl implements DoctorService {
     public long getPositionIdByDoctorId(long id) {
         return doctorRepository.getPositionIdByDoctorId(id);
     }
+
+    @Override
+    public boolean areDoctorsInSameDepartment(Long visitId, UUID userId) {
+        return doctorRepository.areDoctorsInSameDepartment(visitId, userId);
+    }
 }

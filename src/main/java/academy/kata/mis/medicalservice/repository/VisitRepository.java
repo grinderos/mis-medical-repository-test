@@ -15,4 +15,5 @@ public interface VisitRepository extends JpaRepository<Visit, Long> {
             WHERE vis.appeal.id = :appealId
             """)
     List<Visit> getVisitsToReportByAppealId(Long appealId);
+
 }
